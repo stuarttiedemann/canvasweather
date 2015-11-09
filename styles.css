@@ -1,5 +1,9 @@
+body{
+	width: 500px;
+}
 #body-wrapper{
 	width:600px;
+	position: relative;
 }
 #weather-canvas{
 	height: 250px;
@@ -11,4 +15,33 @@
 }
 #search-label{
 	margin
+}
+#forecast{
+	position: relative;
+	margin:25px auto;
+	width: 500px;
+	font-family: 'Myriad Pro';
+	font-size: 26px;
+	color: blue;
+	text-align: center;
+}
+#current-weather-location{
+	text-align: center;
+	/*margin:auto;*/
+	/*position: absolute;
+	top:-30px;
+	left:166px;*/
+}
+#current-weather-icon{
+	position: absolute;
+	top:150px;
+	left:235px;
+}
+#five-day-forecast{
+	width:100%;
+}
+.each-day-forecast{
+	width:19%;
+	float: left;
+	text-align: center;
 }
