@@ -5,7 +5,11 @@ body{
 	width:600px;
 	position: relative;
 }
+#current-temp{
+	position: relative;
+}
 #weather-canvas{
+	position: absolute;
 	height: 250px;
 	width: 500px;
 }
@@ -34,14 +38,34 @@ body{
 }
 #current-weather-icon{
 	position: absolute;
-	top:150px;
-	left:235px;
+	top:169px;
+	left:219px;
+	z-index: 10;
 }
 #five-day-forecast{
 	width:100%;
+	position: absolute;
+	top:430px;
+	left:0;
 }
 .each-day-forecast{
 	width:19%;
 	float: left;
 	text-align: center;
+}
+#compass{
+	width: 150px;
+	height:150px;
+	position: absolute;
+	top:170%;
+	left:75%;
+}
+#arrow{
+	width: 81px;
+	height: 25px;
+	position: absolute;
+	top:230%;
+	left:83%;
+	z-index: 20;
+
 }

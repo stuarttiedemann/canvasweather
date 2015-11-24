@@ -1,34 +1,28 @@
 $(document).ready(function($){
 
-	var apikey = 'YourKey';
+	var apikey = 'f41d10de3c0215d8df8b41a0b82a5f87';
 	var weatherUrl = "";
 	var searchField = "";
 	var fiveDayData = [];
 	$('#search-form').submit(function(){
 		event.preventDefault();
 		searchField = $('#search-field').val();
-		
-		console.log("The value of searchField is "+searchField);
 		weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q="+searchField+",us,ga&units=imperial&APPID="+apikey;
 		forecastUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?q="+searchField+",us,ga&units=imperial&cnt=5&APPID="+apikey;
 		
 		$.getJSON(weatherUrl, function(weatherData){
 			console.log(weatherData);
 
-			
-
-
-
-
+			var windDirection = weatherData.wind.deg;
+			var windSpeed = weatherData.wind.speed;
 			var currTemp = weatherData.main.temp;
 			var icon = weatherData.weather[0].icon;
 			var canvas = $('#weather-canvas');
 			var context = canvas[0].getContext('2d');
 			var location = weatherData.name;
-			var html = "<h2 id='current-weather-location'>"+location+"</h2><img id='current-weather-icon' src='http://openweathermap.org/img/w/"+icon+".png'>";
-			console.log("the location is "+location);
+			var barometricPressure = "Pressure: "+weatherData.main.pressure+"mb";
+			var html = "<h2 id='current-weather-location'>"+location+"</h2><img id='current-weather-icon' src='http://openweathermap.org/img/w/"+icon+".png'<p>"+barometricPressure+"</p><img id='compass' src='wind_compass.gif'><img id='arrow' src='arrow.png' style='transform:rotate("+(windDirection+90)+"deg)'>";
 			var description = weatherData.weather[0].description;
-
 			var lineWidth = 5;
 			var outterRadius = 70;
 			var innerRadius = outterRadius - lineWidth;
@@ -69,6 +63,7 @@ $(document).ready(function($){
 				context.textBaseline = "top";
 				context.fillText(description,200-outterRadius, 110-outterRadius/2);
 				context.fillText(currTemp,230-outterRadius, 85-outterRadius/2);
+				// context.fillText(barometricPressure,240-outterRadius, 60-outterRadius/2);
 				currPerc++;
 				if(currPerc < currTemp){
 					requestAnimationFrame(function () {
@@ -89,7 +84,7 @@ $(document).ready(function($){
 				var forecastIcon;
 				var html2 = "";
 				var myNewDate = "";
-			
+				$('#five-day-forecast').html(html2);
 				for(i=0;i<5;i++){
 					maxTemp = forecastData.list[i].temp.max;
 					minTemp = forecastData.list[i].temp.min;
@@ -100,10 +95,7 @@ $(document).ready(function($){
 					myNewDate = myDate.toString();
 					
 					var x = myNewDate.slice(0,10);
-					console.log(x);
-					// var curr_date = myDate.getDate();
-					// var curr_month = myDate.getMonth();
-					// var curr_day  = myDate.getDay();
+					// console.log(x);
 		
 					html2 = "<div class='each-day-forecast'><p>"+x+"</p><img src='http://openweathermap.org/img/w/"+forecastIcon+".png'><p>High: "+maxTemp+"</p><p>Low: "+minTemp+"</p><p>"+forecastDescription+"</p></div>";
 
