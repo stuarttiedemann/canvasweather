@@ -67,5 +67,6 @@ body{
 	top:230%;
 	left:83%;
 	z-index: 20;
+	transition: transform 2s cubic-bezier(0.09,0.25,0.49,1.58);
 
 }

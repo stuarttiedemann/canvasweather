@@ -13,7 +13,7 @@ $(document).ready(function($){
 		$.getJSON(weatherUrl, function(weatherData){
 			console.log(weatherData);
 
-			var windDirection = weatherData.wind.deg;
+			var windDirection = weatherData.wind.deg+90;
 			var windSpeed = weatherData.wind.speed;
 			var currTemp = weatherData.main.temp;
 			var icon = weatherData.weather[0].icon;
@@ -21,7 +21,7 @@ $(document).ready(function($){
 			var context = canvas[0].getContext('2d');
 			var location = weatherData.name;
 			var barometricPressure = "Pressure: "+weatherData.main.pressure+"mb";
-			var html = "<h2 id='current-weather-location'>"+location+"</h2><img id='current-weather-icon' src='http://openweathermap.org/img/w/"+icon+".png'<p>"+barometricPressure+"</p><img id='compass' src='wind_compass.gif'><img id='arrow' src='arrow.png' style='transform:rotate("+(windDirection+90)+"deg)'>";
+			var html = "<h2 id='current-weather-location'>"+location+"</h2><img id='current-weather-icon' src='http://openweathermap.org/img/w/"+icon+".png'<p>"+barometricPressure+"</p><img id='compass' src='wind_compass.gif'><img id='arrow' src='arrow.png' >";
 			var description = weatherData.weather[0].description;
 			var lineWidth = 5;
 			var outterRadius = 70;
@@ -32,6 +32,8 @@ $(document).ready(function($){
 			var quart = Math.PI / 2;
 			var shadeColor;
 			
+
+
 			if(currTemp < 32){
 				shadeColor = '#D4F0FF';
 			}else if((currTemp >= 32) && (currTemp < 59)){
@@ -71,7 +73,9 @@ $(document).ready(function($){
 					});
 				}
 				$('#forecast').html(html);
-
+				$('#arrow').addClass('rotate');
+				$('#arrow').css('transition', 'transform 2s cubic-bezier(0.09,0.25,0.49,1.58)');
+				$('.rotate').css('transform','rotate('+(windDirection)+'deg)');
 			
 			context.closePath();
 			}
