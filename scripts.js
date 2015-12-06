@@ -4,8 +4,8 @@ $(document).ready(function($){
 	var weatherUrl = "";
 	var searchField = "";
 	var fiveDayData = [];
-	$('#search-form').submit(function(){
-		event.preventDefault();
+	$('#search-form').submit(function(event){
+		event.preventDefault(event);
 		searchField = $('#search-field').val();
 		weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q="+searchField+",us,ga&units=imperial&APPID="+apikey;
 		forecastUrl = "http://api.openweathermap.org/data/2.5/forecast/daily?q="+searchField+",us,ga&units=imperial&cnt=5&APPID="+apikey;
